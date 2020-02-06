@@ -1,0 +1,70 @@
+#컴포즈 파일 규격
+version: "3"
+
+#도커가 지원하는 가상디스크 사용
+# volumes:
+#   django_sample_db_dev: {}
+
+#컨테이너 단위: services
+services:
+  #서비스 명
+  db:
+    #서비스에서 사용할 이미지:버전
+    image: postgres:9.6.1
+    #데이터를 로컬의 ./docker/data에 저장
+    volumes:
+      - ./docker/data:/var/lib/postgresql/data
+
+    #도커의 가상디스크 사용
+    # volumes:
+    #   - django_sample_db_dev:/var/lib/postgresql/data
+
+    #환경변수 설정
+    environment:
+      - POSTGRES_DB=sampledb
+      - POSTGRES_USER=sampleuser
+      - POSTGRES_PASSWORD=samplesecret
+      - POSTGRES_INITDB_ARGS=--encoding=UTF-8
+    #검사
+    healthcheck:
+      #명령어
+      test: "pg_isready -h localhost -p 5432 -q -U postgres"
+      #test의 명령어를 3초 간격으로 시도
+      interval: 3s
+      #타임아웃 1초
+      timeout: 1s
+      #10번시도
+      retries: 10
+
+  django:
+    build:
+      context: .
+      #특정 이미지대신 개발용 도커이미지를 빌드하여 사용
+      dockerfile: ./compose/django/Dockerfile-dev
+    environment:
+      - DJANGO_DEBUG=True
+      - DJANGO_DB_HOST=db
+      - DJANGO_DB_PORT=5432
+      - DJANGO_DB_NAME=sampledb
+      - DJANGO_DB_USERNAME=sampleuser
+      - DJANGO_DB_PASSWORD=samplesecret
+      - DJANGO_SECRET_KEY=dev_secret_key
+    ports:
+      - "8000:8000"
+    depends_on:
+      # db서비스의 헬스체크가 성공(service_healthy) 후 해당 서비스 실행
+      db:
+        condition: service_healthy
+      # nginx서비스 실행 후 실행 됨
+      - nginx
+    links:
+      # db서비스를 db라는 이름으로 참조
+      - db
+    # ./manage.py runserver 0:8000을 대신 할 셀 스크립트 파일
+    #start-dev.sh의 내용
+    #python manage.py migrate
+    #python manage.py runserver 0:8000
+    command: /start-dev.sh
+    #루트 디렉토리를 연결
+    volumes:
+      - ./:/app/
