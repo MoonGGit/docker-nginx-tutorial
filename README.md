@@ -18,10 +18,10 @@
 
 ### **_`더 알아보자..`_**
 
-- express
-- websocket
-- travis ?
-- md...
-- ts...
+-   express
+-   websocket
+-   travis ?
+-   md...
+-   ts...
 
 ---
