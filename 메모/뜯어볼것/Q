@@ -1,0 +1,12 @@
+@ts 자동완성 중
+interface Props {
+    onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
+    또는 
+    onClick?: () => void;
+    display?: 'initial' | 'block' | 'inline';
+    color?: string;
+    component?: ElementType;
+}
+
+
+@

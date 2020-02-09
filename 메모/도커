@@ -16,6 +16,9 @@ docker run --name 이름 -d -p 80:80 -v /root/data:/data 이미지명
     // -d: 백그라운드로 실행, -p: 호스트80과 컨테이너80 포트를 연결하고 외부노출시킴 -> localhost:80으로 접속
     // -v: 호스트의 /root/data 디렉토리를 컨테이너의 /data 디렉토리에 연결
 
+ex)
+docker build . -f Dockerfile.dev -t clientimages    //현재경로에서, 파일지정, clientimages이름으로 이미지 생성(태그지정 마지막에 적어야함) 
+docker run --name clientcontainer -d -p 3000:80 clientimages
 
 ✔컨테이너 상호작용 가능
 ✔volume 옵션으로 로컬코드와 개발서버를 연동

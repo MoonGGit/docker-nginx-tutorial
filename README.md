@@ -8,18 +8,16 @@
 
 > #### nginx : reverse proxy
 
-> #### server : firestore + apollo, cluster
+> #### server : firestore + apollo, cluster, express
 
-> #### worker : redis
+> #### worker : redis?
 
-> #### client : webpack + storybook
+> #### client : webpack + storybook, websocket
 
 ---
 
 ### **_`더 알아보자..`_**
 
--   express
--   websocket
 -   travis ?
 -   md...
 -   ts...
