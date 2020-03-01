@@ -1,0 +1,78 @@
+😆김땅도 할 수 있는 스토리북 튜토리얼
+✔Storybook v5.2 부터는 Component Story Format (CSF) 형식을 사용하여 문서를 작성
+ ->export default { } 형식 사용
+✔기본 설치
+1. >npx -p @storybook/cli sb init --type react  // 시간이 조금 걸림!
+2. >npm run storybook       // 스토리북 서버 실행
+3. stories/ 디렉터리를 src/ 디렉터리로 이동 후, .storybook/main.js의 참조경로'../stories'를 '../src'로 변경
+4. 스토리북 서버 재실행 후 정상작동이면 옮겼던 stories/ 디렉터리를 삭제(이제 내가 만들거야)
+5. example.js 컴포넌트 작성 시, example.stories.js로 스토리 작성
+
+※타입스크립트로 컴포넌트 작성 시 스토리북용 웹팩설정을 해야함
+0. babel-preset-react-app를 설치, 스토리북용의 babel-preset기능을 가진 모듈..babel-loader를 사용하기 위해..
+1. .storybook/ 에 webpack.config.js 파일 생성(원래는 디폴트설정으로 실행됬음)
+   // 5.3버전부터는 .storybook/main.js에 추가 가능, 
+   // .storybook/main.js에 webpackFinal: async (config, { configType }) => { ... webpack.config.js의 2행부터내용 내용 동일 } 를 추가해도 됨
+2. .storybook/main.js에 tsx파일도 처리할 수 있게 추가해줌!
+3. 음.. ? src/에 typings.d.ts 생성 후 declare module '*.mdx'; 추가 후 저장
+   // ts 파일에서 mdx 확장자로 이루어진 파일을 불러오게 될 때 모듈이 없다는 에러를 방지하기 위함. ??
+
+😆Knobs 애드온 적용 : 컴포넌트의 props를 스토리북 화면에서 변경해 바로 반영시켜줌
+1. npm install @storybook/addon-knobs -D
+2. .storybook/main.js의 addons에 '@storybook/addon-knobs/register'를 추가
+3. 스토리에 withKnobs함수(데코레이터-decorator 라고 부름) 사용 
+   추가-> import { withKnobs, text, boolean, number } from '@storybook/addon-knobs';
+   export default에 decorators: [withKnobs] 추가
+
+    ✔Knobs종류들 
+    text: 텍스트를 입력 할 수 있습니다.
+    boolean: true/false 값을 체크박스로 설정 할 수 있습니다.
+    number: 숫자를 입력 할 수 있습니다. 1~10과 같이 간격을 설정 할 수도 있습니다.
+    color: 컬러 팔레트를 통해 색상을 설정 할 수 있습니다.
+    object: JSON 형태로 객체 또는 배열을 설정 할 수 있습니다.
+    array: 쉼표로 구분된 텍스트 형태로 배열을 설정 할 수 있습니다.
+    select: 셀렉트 박스를 통하여 여러가지 옵션 중에 하나를 선택 할 수 있습니다.
+    radios: Radio 버튼을 통하여 여러가지 옵션 중에 하나를 선택 할 수 있습니다.
+    options: 여러가지 옵션을 선택 하는 UI 를 커스터마이징 할 수 있습니다 (radio, inline-radio, check, inline-check, select, multi-select)
+    files: 파일을 선택 할 수 있습니다.
+    date: 날짜를 선택 할 수 있습니다.
+    button: 특정 함수를 실행하게 하는 버튼을 만들 수 있습니다.
+    ※참고: https://www.npmjs.com/package/@storybook/addon-knobs#available-knobs
+
+
+😆@storybook/addon-actions (기본설치됨)
+import { action } from '@storybook/addon-actions';
+1. 해당 스토리의 이벤트속성에 action('액션 이름')로 전달하면 됨
+
+
+😆Docs 애드온, Docs has peer dependencies on react, react-is(이건 아직 설치안함), and babel-loader(스토리북에 포함됨 아마)
+1. >npm install @storybook/addon-docs -D
+2. .storybook\main.js를 수정 
+  stories: ['../src/**/*.stories.(js|mdx)'],
+  addons에 추가 '@storybook/addon-docs'
+※참고: https://www.npmjs.com/package/@storybook/addon-docs
+※참고: https://github.com/storybookjs/storybook/blob/next/addons/docs/README.md#installation
+※참고: https://github.com/storybookjs/storybook/blob/next/addons/docs/docs/mdx.md
+3. >npm install react-docgen-typescript-loader -D
+  // 컴포넌트의 props 에서 사용된 TypeScript 타입들을 추출하여 문서로 만들어주는 도구
+  // 웹팩에 추가! 
+4. Docs에서 타입설명들을 보여주기 위해서는, 스토리의 export default {} 에서 component에 대상 컴포넌트를 넣어줘야 함(mdx사용 시 불필요)
+   그리고 컴포넌트 파일에서 각 타입위에 주석!
+5. Docs에서 컴포넌트 subtitle은, export default{}에서 parameters옵션의 componentSubtitle에 전달
+6. 컴포넌트의 설명은 컴포넌트 파일에서 컴포넌트 코드 바로 윗 부분에 주석!
+
+😆MDX사용법
+MDX작성법 참조: https://mdxjs.com/
+1. 확장자는 .mdx
+2. vscode에 MDX설치, 그래야 Syntax Highlighting으로 표시됨
+3. @storybook/addon-docs/blocks를 사용하는데 기본 설치되나 봄
+4. 파일 작성 후 .stories.js에서 임포트, export default {} 의 parameters.docs.page로 넘겨줌
+
+😆@storybook/addon-links' (기본설치됨)
+import { linkTo } from '@storybook/addon-links';
+
+😆@storybook/preset-typescript
+참고 : https://storybook.js.org/docs/presets/introduction/
+✔이 모듈을 사용하면 babel-loader의 preset 기능을 사용할 수 없음, 난 노설치
+  아이콘을 리액트 컴포넌트 형태로 사용하기 위하여 babel을 사용 할 것이므로,  -> ?? 
+  직접 TypeScript환경을 직접 설정하는 방식으로 진행

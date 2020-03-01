@@ -1,13 +1,13 @@
 FROM node:alpine
-RUN mkdir -p /tmp
-COPY package.json /tmp
-RUN cd /tmp && npm install
-ENV PATH /tmp/node_modules/.bin:${PATH}
+#RUN mkdir -p /tmp
+#COPY package.json /tmp
+#RUN cd /tmp && npm install
+#ENV PATH /tmp/node_modules/.bin:${PATH}
 
 WORKDIR /app
 COPY . .
 CMD NOW=$(date +"%y-%m-%d %T") && \
     echo "[$NOW] : server started." >> server.log 2>&1 && \
-    rm -rf node_modules && \
-    ln -s /tmp/node_modules/ node_modules && \
+    #rm -rf node_modules && \
+    #ln -s /tmp/node_modules/ node_modules && \
     npm run dev

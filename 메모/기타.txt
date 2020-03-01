@@ -1,1 +1,23 @@
-피그마 -> sketch, flinto, zeplin, 코드디자인 다 포함한 디자인 프로그램(개인사용은 무료)
+✔ 피그마 -> sketch, flinto, zeplin, 코드디자인 다 포함한 디자인 프로그램(개인사용은 무료)
+✔ __dirname : 현재 모듈위치
+✔ promise객체를 리턴하는 함수 -> 비동기(async/await) 또는 then으로 처리
+✔모듈
+  dotenv : 해당 파일경로에 .env를 찾아줌 -> process.env.사용가능
+    사용법-> require("dotenv").config();
+  morgan : 로깅
+  body-parser : POST데이터 처리
+  express-session : 세션관리, 쿠키 
+    옵션-> select:쿠키변조방지 sign값, resave:세션을 항상 저장(false권장), saveUninitialized:변경되지 않은 세션 저장(true권장)
+  fs : Node.js 내장모듈
+    메소드-> readFile, writeFile
+✔ HTTP메소드 : GET(조회), POST(생성:같은결과 보장X, 리소스 위치지정X), DELETE(제거), PUT(생성 및 업데이트:같은 결과 보장, 리소스위치 명확)
+✔ 
+✔
+✔
+✔
+✔
+✔
+✔
+✔
+✔
+✔

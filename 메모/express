@@ -1,6 +1,13 @@
-require("dotenv").config();
-    // 해당 파일경로에 .env를 찾아줌 -> process.env.사용가능
-
-send는 잘나옴
-write는 인코딩이 이상함
-res.json({ success: true, message: "접속완료" });
+✔ send는 잘나옴
+  write는 인코딩이 이상함
+✔res.json({ success: true, message: "접속완료" });
+✔express().get -> 파라미터: res(메소드:write, send, render, end), req(메소드:params, body)
+    .engine
+    .listen
+    .use
+✔
+✔
+✔
+✔
+✔
+✔

@@ -1,1 +1,97 @@
 ts에서 화살표 함수는 defaultProps를 지정못함 -> 파라미터 부분에서 지정
+
+※npm: 종속성포함 설치, 관리
+  npx: CLI도구 및 기타 실행파일을 실행
+
+😃김땅도 따라할 수 있는 튜토리얼
+1. >npm install tslint typescript -D  //나는 글로벌을 싫어함
+2. >npx tsc --init      //글로벌이 싫음, tsconfig.json 생성됨 -> 컴파일시 적용할 옵션지정
+  target: 컴파일된 코드가 어떤 환경에서 실행될 지 정의 ex) es5 or es6
+  module: 컴파일된 코드가 어던 모듈 시스템을 사용할지 정의 ex) common or es2015
+  strict: 모든 타입 체킹 옵션을 활성화한다는 것을 의미
+  esModuleInterop: commonjs 모듈 형태로 이루어진 파일을 es2015 모듈 형태로 호출
+  outDir:  컴파일된 파일들이 저장되는 경로를 지정
+  sourceMap : 소스맵 사용 여부, 원본 소스와 최종소스를 매핑해서 추적할 수 있는 방법
+  noImplicityAny : any 로 선언된 식과 정의에 대해 에러를 발생시킴.
+3. VSCODE EXTENSIONS에 TSlint설치
+4. >npx tslint --init   // tslint.json 생성됨 -> 에러잡아줌
+  settings.json에서 아래 설정 // 나는 eslint랑 prettier로 대신하기때문에 안함 
+  "editor.formatOnSave": false,
+  "tslint.autoFixOnSave": true,
+5. >npm install ts-loader source-map-loader -D
+  source-map-loader : 원본 소스와 최종소스를 매핑해서 추적할 수 있는 방법, enforce:pre로 js에 설정
+6. >npm install @types/react @types/react-dom -D
+  // 리액트 패키지에서 사용할 타입이 정의된 패키지다
+7. 리액트를 사용하는 ts파일은 .tsx 확장자를 사용함
+
+
+😃타입제어하기
+let test : number
+let test : number[]
+let test : string 
+let test : boolean 
+let test : string | undefined
+let test : number | null
+let color: 'red' | 'orange' | 'yellow' = 'red';
+
+✔기타 기본타입 종류
+Event
+void
+
+
+✔함수 파라미터 제어
+function sum(x: number, y: number): number {
+  return x + y;
+}
+
+✔함수 리턴 값 제어
+function returnNothing(): void {
+  console.log('I am just saying hello world');
+}
+
+😃interface를 사용해보자
+interface Shape {
+  name?: string;    // ?는 설정해도 되고 안해도 됨
+  getArea(): number; // getArea라는 함수 필수, 리턴값은 숫자
+  // getArea(): () => String;  -> 리턴값은 String을 리턴하는 함수!
+}
+
+✔클래스로 생성
+class Circle implements Shape {
+  radius: number; // 타입 제어
+
+  constructor(radius: number) {
+    this.radius = radius;
+  }
+
+  getArea() {
+    return this.radius * this.radius * Math.PI;
+  }
+}
+
+✔일반 객체로 생성
+const test : Shape = {
+  name:'테스트',
+  getArea: ()=>2
+}
+
+✔ tsx에서 스토리북에 적용하기 위한 작성법 
+const TestComponent = ({ name }: Props) => <span>{name}</span>
+
+
+🤔?🤔
+interface UIElement {
+    addClickListener(onclick: (this: void, e: Event) => void): void;
+}
+class Handler {
+    info: string;
+    onClickGood = (e: Event) => { this.info = e.message }
+}
+let h = new Handler();
+uiElement.addClickListener(h.onClickGood);    // 가능 ???
+
+
+
+
+
+

@@ -9,8 +9,10 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "nodemon": "^2.0.2",
+        "dotenv": "^8.2.0",
         "express": "^4.17.1",
+        "firebase-admin": "^8.9.2",
+        "nodemon": "^2.0.2",
         "uuid": "^3.3.3"
     }
 }

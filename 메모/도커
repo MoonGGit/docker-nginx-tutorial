@@ -44,12 +44,3 @@ docker-compose logs 컨테이너이름 -f     // -f: 팔로잉
 docker-compose.yml
 ports옵션 과 env_file옵션에 세팅한 파일 내 PORT 은 동일 ?
 dockerfile의 expose - they’ll only be accessible to linked services, 어쨋든 컨테이너끼리 통신
-
-
-
-
-
-
-
-
-

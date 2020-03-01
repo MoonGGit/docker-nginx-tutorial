@@ -1,0 +1,15 @@
+😆김땅도 따라 할 수 있는 파이어스토어 연동
+1. >npm install firebase-admin -D 
+2. 파이어베이스 가입 및 프로젝트 생성
+3. gcp의 'IAM 및 관리자' > '서비스 계정'에서 2.에서 생성한 파페 프로젝트의 서비스 계정을 생성
+    ※https://console.cloud.google.com/iam-admin/serviceaccounts?hl=ko&project=docker-nginx-tutorial&supportedpurview=project
+4. 3.에서 생성한 비공개키로 파이어베이스를 초기화해서 사용 
+참고 : https://firebase.google.com/docs/firestore/quickstart?hl=ko
+
+✔데이터 추가
+
+
+✔데이터 읽기
+
+
+✔데이터 보안
