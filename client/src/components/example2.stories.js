@@ -1,7 +1,7 @@
 import React from 'react';
 import { withKnobs, text, number } from '@storybook/addon-knobs';
 import TestComponent from './example2';
-import mdx from './example2mdx.mdx';
+import mdx from './example2.mdx';
 
 export default {
     title: '예제2|테스트', // 문서에 경로

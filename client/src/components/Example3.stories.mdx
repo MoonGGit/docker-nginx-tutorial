@@ -1,0 +1,60 @@
+import Com from './Example3';
+import { Meta, Story, Props, Preview, Description } from '@storybook/addon-docs/blocks';
+import { withKnobs, text } from '@storybook/addon-knobs';
+import testmd from './TEST.md';
+
+<Meta title="MDX만 사용|예제/1" component={Com} decorators={[withKnobs]} />
+
+# 컴포넌트(default)
+
+<Preview>
+    <Story name="default">
+        <Com />
+    </Story>
+</Preview>
+
+### **Description가 안됨; ↓↓기타 사용 법↓↓**
+
+```javascript
+import { Description } from '@storybook/addon-docs/blocks';
+import readme from '../../README.md';
+export const plainMD = () => {
+    return <Description markdown={readme} />;
+};
+```
+
+<Description markdown={testmd} />
+
+## Props
+
+<Props of={Com} />
+
+## 1
+
+설명1
+
+<Preview>
+    <Story name="1">
+        <Com animation={text('애니', 'マママ')} />
+    </Story>
+</Preview>
+
+## 2
+
+설명2
+
+<Preview>
+    <Story name="2">
+        <Com animation="steins gate" />
+    </Story>
+</Preview>
+
+## 3
+
+설명3
+
+<Preview>
+    <Story name="3">
+        <Com animation="俺いる" />
+    </Story>
+</Preview>
