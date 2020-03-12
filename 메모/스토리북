@@ -41,9 +41,10 @@
 
 
 😆@storybook/addon-actions (기본설치됨)
-import { action } from '@storybook/addon-actions';
-1. 해당 스토리의 이벤트속성에 action('액션 이름')로 전달하면 됨
-
+import { action, withActions } from '@storybook/addon-actions';
+1. 스토리 컴포넌트의 적용할 이벤트에 action('로그')로 전달하면 됨
+2. withActions('click *','mouseover button')를 export default{}의 decorators의 배열로 전달
+    // withActions('이벤트 셀럭터', ...)
 
 😆Docs 애드온, Docs has peer dependencies on react, react-is(이건 아직 설치안함), and babel-loader(스토리북에 포함됨 아마)
 1. >npm install @storybook/addon-docs -D
@@ -60,6 +61,7 @@ import { action } from '@storybook/addon-actions';
    그리고 컴포넌트 파일에서 각 타입위에 주석!
 5. Docs에서 컴포넌트 subtitle은, export default{}에서 parameters옵션의 componentSubtitle에 전달
 6. 컴포넌트의 설명은 컴포넌트 파일에서 컴포넌트 코드 바로 윗 부분에 주석!
+※타입스크립트 사용 시, ~.stories.tsx사용 → 그래야 타입체킹이 됨
 😆MDX사용법
 MDX작성법 참조: https://mdxjs.com/
 1. 확장자는 .mdx
@@ -68,6 +70,7 @@ MDX작성법 참조: https://mdxjs.com/
 4. 파일 작성 후 .stories.js에서 임포트, export default {} 의 parameters.docs.page로 넘겨줌
 😆😆 ~.stories.js사용하지 않고 바로 MDX사용하기!!
 1. 컴포넌트 파일 작성 후, ~.stories.mdx을 작성한당
+※ 굳이 mdx로 작성하지 않아도 왠만한건 작성이 다 됨
 
 ✔addon-docs/blocks의 태그들
   Meta: export default {} 같은 애

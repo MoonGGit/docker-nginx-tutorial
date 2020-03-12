@@ -4,7 +4,8 @@
     "jsRules": {},
     "rules": {
         "semicolon": true,
-        "space-before-function-paren": false
+        "space-before-function-paren": false,
+        "no-console": false
     },
     "rulesDirectory": []
 }

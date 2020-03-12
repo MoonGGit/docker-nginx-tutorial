@@ -14,7 +14,7 @@ ts에서 화살표 함수는 defaultProps를 지정못함 -> 파라미터 부분
   sourceMap : 소스맵 사용 여부, 원본 소스와 최종소스를 매핑해서 추적할 수 있는 방법
   noImplicityAny : any 로 선언된 식과 정의에 대해 에러를 발생시킴.
 3. VSCODE EXTENSIONS에 TSlint설치
-4. >npx tslint --init   // tslint.json 생성됨 -> 에러잡아줌
+4. >npx tslint --init   // tslint.json 생성됨 -> 코드상 에러띄어줌
   settings.json에서 아래 설정 // 나는 eslint랑 prettier로 대신하기때문에 안함 
   "editor.formatOnSave": false,
   "tslint.autoFixOnSave": true,
@@ -24,7 +24,6 @@ ts에서 화살표 함수는 defaultProps를 지정못함 -> 파라미터 부분
   // 리액트 패키지에서 사용할 타입이 정의된 패키지다
 7. 리액트를 사용하는 ts파일은 .tsx 확장자를 사용함
 
-
 😃타입제어하기
 let test : number
 let test : number[]
@@ -33,11 +32,14 @@ let test : boolean
 let test : string | undefined
 let test : number | null
 let color: 'red' | 'orange' | 'yellow' = 'red';
+children: React.ReactNode;    // 리액트의 타입, 자식으로 모든 리액트컴포넌트 전달가능하게..
+onClick?(): void;
+onClick?: () => void;
 
 ✔기타 기본타입 종류
 Event
 void
-
+React.MouseEvent<HTMLButtonElement>
 
 ✔함수 파라미터 제어
 function sum(x: number, y: number): number {
@@ -87,8 +89,15 @@ class Handler {
     info: string;
     onClickGood = (e: Event) => { this.info = e.message }
 }
+
 let h = new Handler();
 uiElement.addClickListener(h.onClickGood);    // 가능 ???
+
+🤔typings.d.ts
+기존 js모듈을 ts에서 사용하기 위해, js모듈의 타입 정보를 기술 하는 곳
+1. 단순히 npm으로 타입전용 모듈을 받는다(없는 경우도 있음)  // @types/모듈이름 
+2. typings.d.ts에 declare module '모듈이름';  을 기술
+
 
 
 
