@@ -3,7 +3,7 @@ import { withKnobs, text, boolean, radios } from '@storybook/addon-knobs';
 import Wrapper from '../Wrapper';
 
 export default {
-    title: '버튼|Wrapper/styled-Wrapper',
+    title: '입력래퍼|Wrapper/styled-Wrapper',
     component: Wrapper,
     decorators: [withKnobs],
 };

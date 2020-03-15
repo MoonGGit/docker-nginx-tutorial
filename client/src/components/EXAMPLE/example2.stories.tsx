@@ -5,7 +5,7 @@ import TestComponent from './example2';
 import mdx from './example2.mdx';
 
 export default {
-    title: '예제2|테스트', // 문서에 경로
+    title: '예제|example2', // 문서에 경로
     component: TestComponent, // 문서화 대상 컴포넌트(mdx사용 시 불필요)
     decorators: [withKnobs, withActions('click span')], // 애드온
     parameters: {

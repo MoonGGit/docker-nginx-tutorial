@@ -11,7 +11,7 @@
   fs : Node.js 내장모듈
     메소드-> readFile, writeFile
 ✔ HTTP메소드 : GET(조회), POST(생성:같은결과 보장X, 리소스 위치지정X), DELETE(제거), PUT(생성 및 업데이트:같은 결과 보장, 리소스위치 명확)
-✔ 
+✔ rm -rf node_modules && npm cache clean --force && npm install
 ✔
 ✔
 ✔

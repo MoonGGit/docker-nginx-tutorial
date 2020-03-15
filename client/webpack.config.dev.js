@@ -100,7 +100,7 @@ module.exports = {
     },
     resolve: {
         // import시 확장자 생략가능
-        extensions: ['.ts', '.js', '.json'],
+        extensions: ['.ts', '.tsx', '.js', '.json'],
     },
     plugins: [
         new HtmlWebPackPlugin({

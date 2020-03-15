@@ -1,41 +1,79 @@
 import React from 'react';
-import Button, { Props as ButtonProps } from './Button';
+import styled from 'styled-components';
 import Wrapper, { Props as WrapperProps } from './Wrapper';
+import Button, { Props as ButtonProps } from './Button';
+import Input, { Props as InputProps } from './Input';
 
-interface Props extends ButtonProps, WrapperProps {
-    /** 버튼 유무 */
-    btn?: boolean;
-    /** 버튼이름 배열 */
-    btnTextArr?: string[];
-    /** 인풋 유무 */
-    input?: boolean;
-    /** 인풋 개수 */
-    inputCount?: number;
-    /** 인풋이름 배열 */
-    inputTextArr?: string[];
+const BlockOutter = styled('div')`
+    ${(props: Props) =>
+        props.backgroundBlock
+            ? `
+            width: 100%;
+            height: 100%;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            `
+            : `
+            `};
+    ${(props: any) => props.css};
+`;
+
+const BlockInner = styled('div')`
+    ${(props: Props) =>
+        props.backgroundBlock
+            ? `
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: lightgrey;
+            z-index: -1;
+            `
+            : `
+            display: none;
+            `};
+`;
+
+export interface ComponentProps extends ButtonProps, InputProps {
+    type: 'BUTTON' | 'INPUT';
+    css?: any;
 }
 
-const styles = {
-    btnIsGreaterThanZero: {
-        marginLeft: '5px',
-    },
-};
+export interface Props extends WrapperProps {
+    /** 배경 블록 */
+    backgroundBlock: boolean;
+    /** 컴포넌트(구현: 버튼, 인풋) */
+    components?: ComponentProps[];
+    /** 기타 커스텀 컴포넌트 */
+    children?: React.ReactNode;
+}
 
-const ButtonWrapper = ({ btn, btnTextArr, input, inputCount, inputTextArr, ...props }: Props) => {
+const ButtonWrapper = ({ backgroundBlock, components, children, ...props }: Props) => {
     return (
-        <Wrapper {...props}>
-            {btn &&
-                (btnTextArr !== undefined && btnTextArr.length > 0
-                    ? btnTextArr.map((btnText, index) => {
-                          return <Button css={styles.btnIsGreaterThanZero} key={index} {...{ ...props, btnText }}></Button>;
+        <BlockOutter backgroundBlock={backgroundBlock} {...props}>
+            <BlockInner backgroundBlock={backgroundBlock}></BlockInner>
+            <Wrapper {...props}>
+                {components && components?.length > 0
+                    ? components.map((component, index) => {
+                          return component.type === 'BUTTON' ? (
+                              <Button key={index} {...component}></Button>
+                          ) : component.type === 'INPUT' ? (
+                              <Input key={index} {...component}></Input>
+                          ) : (
+                              ''
+                          );
                       })
-                    : props.btnText && <Button {...props}></Button>)}
-        </Wrapper>
+                    : ''}
+                {children}
+            </Wrapper>
+        </BlockOutter>
     );
 };
 
 ButtonWrapper.defaultProps = {
-    ...Button.defaultProps,
+    backgroundBlock: false,
     ...Wrapper.defaultProps,
 };
 
