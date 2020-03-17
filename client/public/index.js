@@ -1,5 +1,7 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import App from '../src/App';
 
-ReactDOM.render(<App />, document.getElementById('container'));
+import('../src/App').then(({ default: App }) => {
+    import('react-dom').then(({ default: ReactDOM }) => {
+        ReactDOM.render(<App />, document.getElementById('container'));
+    });
+});

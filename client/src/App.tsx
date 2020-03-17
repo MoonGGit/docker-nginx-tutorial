@@ -21,9 +21,17 @@ const Components: ComponentProps[] = [
         },
     },
     {
-        theme: 'dark',
+        theme: 'light',
         type: 'BUTTON',
         btnText: 'LOGIN',
+        css: {
+            opacity: 0.7,
+        },
+    },
+    {
+        theme: 'dark',
+        type: 'BUTTON',
+        btnText: 'SING UP',
         css: {
             opacity: 0.7,
         },
