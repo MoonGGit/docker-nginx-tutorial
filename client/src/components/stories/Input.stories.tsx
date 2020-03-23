@@ -14,19 +14,19 @@ export const Default = () => {
 };
 
 export const Light = () => {
-    const theme = radios('[Light]theme', { Light: 'light', Dark: 'dark', Green: 'green' }, 'light');
+    const customTheme = radios('[Light]customTheme', { Light: 'light', Dark: 'dark', Green: 'green' }, 'light');
     const placeholder = text('[Light]placeholder', 'light');
-    return <Input {...{ theme, placeholder }} />;
+    return <Input {...{ customTheme, placeholder }} />;
 };
 
 export const Dark = () => {
-    const theme = radios('[Dark]theme', { Light: 'light', Dark: 'dark', Green: 'green' }, 'dark');
+    const customTheme = radios('[Dark]customTheme', { Light: 'light', Dark: 'dark', Green: 'green' }, 'dark');
     const placeholder = text('[Dark]placeholder', 'dark');
-    return <Input {...{ theme, placeholder }} />;
+    return <Input {...{ customTheme, placeholder }} />;
 };
 
 export const Green = () => {
-    const theme = radios('[Green]theme', { Light: 'light', Dark: 'dark', Green: 'green' }, 'green');
+    const customTheme = radios('[Green]customTheme', { Light: 'light', Dark: 'dark', Green: 'green' }, 'green');
     const placeholder = text('[Green]placeholder', 'green');
-    return <Input {...{ theme, placeholder }} />;
+    return <Input {...{ customTheme, placeholder }} />;
 };

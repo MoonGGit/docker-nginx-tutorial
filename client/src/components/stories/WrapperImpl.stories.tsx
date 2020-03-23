@@ -17,7 +17,7 @@ export const WrapperWithComponent = () => {
     const isTitleOrSub = boolean('isTitleOrSub', true);
     const title = text('title', '안녕하살법');
     const subscription = text('subscription', '받아치기!');
-    const theme = radios('theme', { Light: 'light', Dark: 'dark', Green: 'green' }, 'light');
+    const customTheme = radios('theme', { Light: 'light', Dark: 'dark', Green: 'green' }, 'light');
     const big = boolean('big', false);
     const verticalAlign = boolean('verticalAlign', false);
     const verticalBottom = boolean('verticalBottom', false);
@@ -29,7 +29,7 @@ export const WrapperWithComponent = () => {
     const buttonComponents: ComponentProps[] = [
         {
             type: 'BUTTON',
-            theme: 'dark',
+            customTheme: 'dark',
             btnText: 'cancel',
             big: false,
             onClick: event => {
@@ -39,7 +39,7 @@ export const WrapperWithComponent = () => {
         },
         {
             type: 'BUTTON',
-            theme: 'light',
+            customTheme: 'light',
             btnText: 'OK',
             big: false,
             onClick: event => {
@@ -51,7 +51,7 @@ export const WrapperWithComponent = () => {
     const inputComponents: ComponentProps[] = [
         {
             type: 'INPUT',
-            theme: 'dark',
+            customTheme: 'dark',
             placeholder: 'dark placeholder',
             big: false,
             onChange: event => {
@@ -61,7 +61,7 @@ export const WrapperWithComponent = () => {
         },
         {
             type: 'INPUT',
-            theme: 'light',
+            customTheme: 'light',
             placeholder: 'light placeholder',
             big: false,
             onChange: event => {
@@ -78,7 +78,7 @@ export const WrapperWithComponent = () => {
         <WrapperImpl
             {...{
                 big,
-                theme,
+                customTheme,
                 title,
                 verticalAlign,
                 subscription,

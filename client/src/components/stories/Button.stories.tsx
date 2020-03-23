@@ -15,21 +15,21 @@ export const Default = () => {
 
 export const Light = () => {
     const btnText = text('[Light]text', 'light: click me');
-    const theme = radios('[Light]theme', { Light: 'light', Dark: 'dark', Green: 'green' }, 'light');
+    const customTheme = radios('[Light]customTheme', { Light: 'light', Dark: 'dark', Green: 'green' }, 'light');
     const big = boolean('[Light]size', false);
-    return <Button {...{ btnText, theme, big }}></Button>;
+    return <Button {...{ btnText, customTheme, big }}></Button>;
 };
 
 export const Dark = () => {
     const btnText = text('[Dark]text', 'dark: click me');
-    const theme = radios('[Dark]theme', { Light: 'light', Dark: 'dark', Green: 'green' }, 'dark');
+    const customTheme = radios('[Dark]customTheme', { Light: 'light', Dark: 'dark', Green: 'green' }, 'dark');
     const big = boolean('[Dark]size', false);
-    return <Button {...{ btnText, theme, big }}></Button>;
+    return <Button {...{ btnText, customTheme, big }}></Button>;
 };
 
 export const Green = () => {
     const btnText = text('[Green]text', 'green: click me');
-    const theme = radios('[Green]theme', { Light: 'light', Dark: 'dark', Green: 'green' }, 'green');
+    const customTheme = radios('[Green]customTheme', { Light: 'light', Dark: 'dark', Green: 'green' }, 'green');
     const big = boolean('[Green]size', false);
-    return <Button {...{ btnText, theme, big }}></Button>;
+    return <Button {...{ btnText, customTheme, big }}></Button>;
 };

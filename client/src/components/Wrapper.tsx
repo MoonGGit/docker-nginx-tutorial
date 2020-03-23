@@ -1,37 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 /**
- * 바깥
- */
-const DefaultWrapper = styled('div')`
-    display: inline-block;
-    box-sizing: border-box;
-    padding: 2.5%;
-    ${(props: Props) =>
-        props.verticalAlign || !props.isTitleOrSub
-            ? `
-            width : ${
-                props.verticalAlign
-                    ? props.verticalWrapperWidth && props.verticalWrapperWidth !== 0
-                        ? props.verticalWrapperWidth + 'px'
-                        : '100%'
-                    : !props.isTitleOrSub
-                    ? ''
-                    : '100%'
-            };
-            height: ${props.verticalWrapperHeight && props.verticalWrapperHeight !== 0 ? props.verticalWrapperHeight + 'px' : '100%'};
-            `
-            : `
-            min-width: 320px;
-            min-height: 160px;
-            border-radius: 5px;
-            padding-bottom: 1%;
-     `}
-`;
-
-/**
- * 안(내용 + 자식)
+ * 안div(내용 + 자식)
  */
 const WrapperInner = styled('div')`
     width: 100%;
@@ -70,34 +41,71 @@ const WrapperInner = styled('div')`
                                 : '10px'
                         };
                         margin-left: ${
-                            props.verticalAlign ? '' : props.horizonLineWidth && props.horizonLineWidth !== 0 ? props.horizonLineWidth + 'px' : '8px'
+                            props.verticalAlign
+                                ? ''
+                                : props.horizonLineWidth && props.horizonLineWidth !== 0
+                                ? props.horizonLineWidth + 'px'
+                                : '8px'
                         };
                     }
                 }
                 `
                 : `
-                & > button, & > input {
+                & > * {
                     margin-left: 5px;
                 }
-                padding-top: 28px;
-                padding-left: 10px;
+                padding-top: 45px;
+                padding-left: 12px;
                 text-align: right;
         `}
     }
 `;
 
-const WrapperThemes = {
-    light: styled(DefaultWrapper)`
+/**
+ * 바깥div
+ */
+const WrapperOutter = styled('div')`
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 2.5%;
+    ${(props: Props) =>
+        props.verticalAlign || !props.isTitleOrSub
+            ? `
+            width : ${
+                props.verticalAlign
+                    ? props.verticalWrapperWidth && props.verticalWrapperWidth !== 0
+                        ? props.verticalWrapperWidth + 'px'
+                        : '100%'
+                    : !props.isTitleOrSub
+                    ? ''
+                    : '100%'
+            };
+            height: ${
+                props.verticalWrapperHeight && props.verticalWrapperHeight !== 0 ? props.verticalWrapperHeight + 'px' : '100%'
+            };
+            `
+            : `
+            min-width: 400px;
+            min-height: 200px;
+            border-radius: 5px;
+            padding-bottom: 1%;
+     `}
+    ${(props: Props) => props.customTheme && WrapperTheme[props.customTheme]}
+    ${(props: Props) => props.css};
+`;
+
+const WrapperTheme: styled.theme = {
+    light: css`
         border: 2px solid black;
         background: white;
         color: black;
     `,
-    dark: styled(DefaultWrapper)`
+    dark: css`
         border: 2px solid #5c5d5c;
         background: #353b48;
         color: white;
     `,
-    green: styled(DefaultWrapper)`
+    green: css`
         border: 2px solid #9ee4c2;
         background: #9bd87c;
         color: white;
@@ -106,12 +114,11 @@ const WrapperThemes = {
             font-weight: bold;
         }
     `,
-    none: styled(DefaultWrapper)``,
 };
 
-export interface Props {
-    /** [공통]테마 */
-    theme: 'light' | 'dark' | 'green' | 'none';
+export interface Props extends JSX.IntrinsicAttributes {
+    /** 커스텀 테마, 우선순위 : 글로벌 < 커스텀 < css */
+    customTheme?: styled.themeType;
     /** [공통]크기 - 미구현 */
     big?: boolean;
     /** 제목 */
@@ -154,8 +161,7 @@ export interface Props {
  *
  *  ### BIG 미구현
  */
-const Wrapper = ({ theme, title, subscription, children, ...props }: Props) => {
-    const WrapperOutter = WrapperThemes[theme];
+const Wrapper = ({ title, subscription, children, ...props }: Props) => {
     return (
         <WrapperOutter {...props}>
             <WrapperInner {...props}>
@@ -168,7 +174,6 @@ const Wrapper = ({ theme, title, subscription, children, ...props }: Props) => {
 };
 
 Wrapper.defaultProps = {
-    theme: 'light',
     big: false,
     isTitleOrSub: true,
     verticalAlign: false,

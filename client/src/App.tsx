@@ -1,11 +1,17 @@
 import React from 'react';
 import WrapperImple, { Props, ComponentProps } from './components/WrapperImpl';
 import image from './assets/images/background/ALSPQM_AOSK4513.jpg';
-import GlobalStyle from './styles/globalStyle';
+import ThemeProvider from './styles/ThemeProvider';
+import configureStore from './store/store';
+import reducer from './reducers/index';
+import { Provider } from 'react-redux';
+import { ACTION_TYPE } from './actions/button';
+import Button from './components/Button';
+import Test from './components/test';
 
 const Components: ComponentProps[] = [
     {
-        theme: 'dark',
+        customTheme: 'dark',
         type: 'INPUT',
         placeholder: 'ID',
         css: {
@@ -13,7 +19,7 @@ const Components: ComponentProps[] = [
         },
     },
     {
-        theme: 'dark',
+        customTheme: 'dark',
         type: 'INPUT',
         placeholder: 'PASSWORD',
         css: {
@@ -21,15 +27,20 @@ const Components: ComponentProps[] = [
         },
     },
     {
-        theme: 'light',
+        customTheme: 'light',
         type: 'BUTTON',
         btnText: 'LOGIN',
         css: {
             opacity: 0.7,
+            fontSize: '30px',
+        },
+        action: {
+            type: ACTION_TYPE.TEST1,
+            value: { testValue1: 'test입니당!' },
         },
     },
     {
-        theme: 'dark',
+        customTheme: 'dark',
         type: 'BUTTON',
         btnText: 'SING UP',
         css: {
@@ -40,17 +51,30 @@ const Components: ComponentProps[] = [
 
 const props: Props = {
     backgroundBlock: false,
+    title: 'asd',
+    subscription: 'test',
+    verticalWrapperWidth: 300,
+    verticalWrapperHeight: 300,
+    isTitleOrSub: true,
     verticalAlign: true,
     verticalBottom: true,
     components: Components,
-    theme: 'none',
+    customTheme: 'green',
+    css: {
+        backgroundImage: 'url(' + image + ')',
+        backgroundSize: '100% 100%',
+        border: 'none',
+    },
 };
+const store = configureStore(reducer, {});
 
 const Main = () => {
     return (
-        <>
-            <WrapperImple css={{ height: '100%', backgroundImage: 'url(' + image + ')', backgroundSize: '100% 100%' }} {...props}></WrapperImple>
-        </>
+        <Provider store={store}>
+            <ThemeProvider theme="dark">
+                <WrapperImple {...props}></WrapperImple>
+            </ThemeProvider>
+        </Provider>
     );
 };
 

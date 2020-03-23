@@ -12,10 +12,10 @@
     메소드-> readFile, writeFile
 ✔ HTTP메소드 : GET(조회), POST(생성:같은결과 보장X, 리소스 위치지정X), DELETE(제거), PUT(생성 및 업데이트:같은 결과 보장, 리소스위치 명확)
 ✔ rm -rf node_modules && npm cache clean --force && npm install
-✔
-✔
-✔
-✔
+✔ styled-normalize -> 브라우저마다의 스타일을 일관성있게 유지 시켜주는 놈?
+✔ styled-components로 생성된 태그는 css프로퍼티가 바로 안먹힘 ㅎㅎ
+✔ React.CSSProperties;  -> JSX.IntrinsicAttributes
+✔ .ts 에서는 임포트 시 * as 사용해야 뻑안남 .. 
 ✔
 ✔
 ✔

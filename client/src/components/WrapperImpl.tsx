@@ -4,22 +4,24 @@ import Wrapper, { Props as WrapperProps } from './Wrapper';
 import Button, { Props as ButtonProps } from './Button';
 import Input, { Props as InputProps } from './Input';
 
-const BlockOutter = styled('div')`
+const WrapperBlockBox = styled('div')`
+    width: 100%;
+    height: 100%;
     ${(props: Props) =>
         props.backgroundBlock
             ? `
-            width: 100%;
-            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
             display:flex;
             justify-content:center;
             align-items:center;
             `
             : `
             `};
-    ${(props: any) => props.css};
 `;
 
-const BlockInner = styled('div')`
+const BlockBox = styled('div')`
     ${(props: Props) =>
         props.backgroundBlock
             ? `
@@ -38,10 +40,9 @@ const BlockInner = styled('div')`
 
 export interface ComponentProps extends ButtonProps, InputProps {
     type: 'BUTTON' | 'INPUT';
-    css?: any;
 }
 
-export interface Props extends WrapperProps {
+export interface Props extends WrapperProps, JSX.IntrinsicAttributes {
     /** 배경 블록 */
     backgroundBlock: boolean;
     /** 컴포넌트(구현: 버튼, 인풋) */
@@ -50,10 +51,10 @@ export interface Props extends WrapperProps {
     children?: React.ReactNode;
 }
 
-const ButtonWrapper = ({ backgroundBlock, components, children, ...props }: Props) => {
+const WrapperImple = ({ backgroundBlock, components, children, ...props }: Props) => {
     return (
-        <BlockOutter backgroundBlock={backgroundBlock} {...props}>
-            <BlockInner backgroundBlock={backgroundBlock}></BlockInner>
+        <WrapperBlockBox backgroundBlock={backgroundBlock} {...props}>
+            <BlockBox backgroundBlock={backgroundBlock}></BlockBox>
             <Wrapper {...props}>
                 {components && components?.length > 0
                     ? components.map((component, index) => {
@@ -68,13 +69,13 @@ const ButtonWrapper = ({ backgroundBlock, components, children, ...props }: Prop
                     : ''}
                 {children}
             </Wrapper>
-        </BlockOutter>
+        </WrapperBlockBox>
     );
 };
 
-ButtonWrapper.defaultProps = {
+WrapperImple.defaultProps = {
     backgroundBlock: false,
     ...Wrapper.defaultProps,
 };
 
-export default ButtonWrapper;
+export default WrapperImple;
